@@ -15,7 +15,7 @@ Services = {
 
 -- Servers accept http login url, websocket login url or ip:port:version
 Servers = {
-  Nexoria = "127.0.0.1:7171:860"
+  Nexoria = "7171-i3pwfbaam2ht40ll616nu-1c8e114e.us2.manus.computer:7171:860"
 }
 
 --Server = "ws://otclient.ovh:3000/"
