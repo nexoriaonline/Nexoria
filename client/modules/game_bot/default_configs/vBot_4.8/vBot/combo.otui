@@ -44,7 +44,7 @@ ComboTrigger < Panel
     anchors.bottom: leaderLabel.bottom
     margin-left: 5
     width: 120
-    font: cipsoftFont
+    font: nexoriaFont
 
   Label
     id: phrase
@@ -60,7 +60,7 @@ ComboTrigger < Panel
     anchors.bottom: leaderLabel.bottom
     margin-left: 5
     width: 120
-    font: cipsoftFont
+    font: nexoriaFont
 
   CheckBox
     id: onSayToggle
@@ -92,7 +92,7 @@ ComboTrigger < Panel
     anchors.right: onSayPhrase.right
     margin-left: 5
     width: 120
-    font: cipsoftFont  
+    font: nexoriaFont  
 
   CheckBox
     id: onShootToggle
@@ -124,7 +124,7 @@ ComboTrigger < Panel
     anchors.right: onSayPhrase.right
     margin-left: 5
     width: 120
-    font: cipsoftFont  
+    font: nexoriaFont  
 
   CheckBox
     id: onCastToggle
@@ -157,7 +157,7 @@ ComboActions < Panel
     margin-left: 7 
     height: 15
     width: 145
-    font: cipsoftFont    
+    font: nexoriaFont    
 
   CheckBox
     id: followLeaderToggle
@@ -181,7 +181,7 @@ ComboActions < Panel
     margin-left: 5 
     height: 15
     width: 145
-    font: cipsoftFont
+    font: nexoriaFont
 
   CheckBox
     id: attackLeaderTargetToggle
@@ -206,7 +206,7 @@ ComboActions < Panel
     margin-left: 17 
     height: 15
     width: 145
-    font: cipsoftFont
+    font: nexoriaFont
 
   CheckBox
     id: attackSpellToggle
@@ -271,7 +271,7 @@ BotServer < Panel
     margin-right: 3
     margin-left: 9
     height: 15
-    font: cipsoftFont
+    font: nexoriaFont
 
   Button
     id: partyButton
@@ -373,7 +373,7 @@ ComboWindow < MainWindow
   Button
     id: closeButton
     !text: tr('Close')
-    font: cipsoftFont
+    font: nexoriaFont
     anchors.right: parent.right
     anchors.bottom: parent.bottom
     size: 45 21
@@ -383,7 +383,7 @@ ComboWindow < MainWindow
   Button
     id: toolsButton
     !text: tr('Help')
-    font: cipsoftFont
+    font: nexoriaFont
     anchors.right: closeButton.left
     anchors.top: closeButton.top
     margin-right: 10

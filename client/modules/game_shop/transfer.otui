@@ -61,7 +61,7 @@ MainWindow
   Button
     id: cancelButton
     !text: tr('Cancel')
-    font: cipsoftFont
+    font: nexoriaFont
     anchors.right: parent.right
     anchors.bottom: parent.bottom
     size: 45 21
@@ -72,7 +72,7 @@ MainWindow
   Button
     id: giftButton
     !text: tr('Gift')
-    font: cipsoftFont
+    font: nexoriaFont
     size: 45 21
     anchors.verticalCenter: prev.verticalCenter
     anchors.right: prev.left

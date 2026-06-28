@@ -127,7 +127,7 @@ QuestLogWindow < MainWindow
   Button
     id: closeButton
     !text: tr('Close')
-    font: cipsoftFont
+    font: nexoriaFont
     anchors.right: parent.right
     anchors.bottom: parent.bottom
     color: #ffffff
@@ -142,7 +142,7 @@ QuestLogWindow < MainWindow
     color: #ffffff
     size: 45 21
     !text: tr('Show')
-    font: cipsoftFont
+    font: nexoriaFont
     @onClick: modules.game_questlog.showQuestLine()
 
   Button
@@ -154,7 +154,7 @@ QuestLogWindow < MainWindow
     size: 80 21
     text-align: center
     !text: tr('Quest Tracker')
-    font: cipsoftFont
+    font: nexoriaFont
     @onClick: modules.game_questlog.toggle()
 
 QuestTracker < MiniWindow
@@ -183,6 +183,6 @@ QuestTracker < MiniWindow
         anchors.fill: parent
         margin-left: 30
         margin-right: 30 
-        font: cipsoftFont
+        font: nexoriaFont
         color: #FFFFFF
         @onClick: g_game.requestQuestLog()

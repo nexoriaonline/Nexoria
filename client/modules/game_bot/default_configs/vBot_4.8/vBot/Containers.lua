@@ -231,7 +231,7 @@ ContListsWindow < MainWindow
     margin-top: 5
     text: Add
     width: 40
-    font: cipsoftFont
+    font: nexoriaFont
 
   HorizontalSeparator
     id: separator
@@ -291,7 +291,7 @@ ContListsWindow < MainWindow
   Button
     id: closeButton
     !text: tr('Close')
-    font: cipsoftFont
+    font: nexoriaFont
     anchors.right: parent.right
     anchors.bottom: parent.bottom
     size: 45 21

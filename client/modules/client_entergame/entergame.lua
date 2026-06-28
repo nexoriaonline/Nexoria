@@ -107,7 +107,7 @@ local function validateThings(things)
   end
   if missingFiles then
     incorrectThings = incorrectThings .. "\nYou should open data/things and create directory " .. versionForMissingFiles .. 
-    ".\nIn this directory (data/things/" .. versionForMissingFiles .. ") you should put missing\nfiles (Tibia.dat and Tibia.spr/Tibia.cwm) " ..
+    ".\nIn this directory (data/things/" .. versionForMissingFiles .. ") you should put missing\nfiles (Nexoria.dat and Nexoria.spr/Nexoria.cwm) " ..
     "from correct Tibia version."
   end
   return incorrectThings
@@ -132,15 +132,15 @@ local function onTibia12HTTPResult(session, playdata)
   end
     
   local things = {
-    data = {G.clientVersion .. "/Tibia.dat", ""},
-    sprites = {G.clientVersion .. "/Tibia.cwm", ""},
+    data = {G.clientVersion .. "/Nexoria.dat", ""},
+    sprites = {G.clientVersion .. "/Nexoria.cwm", ""},
   }
 
   local incorrectThings = validateThings(things)
   if #incorrectThings > 0 then
     things = {
-      data = {G.clientVersion .. "/Tibia.dat", ""},
-      sprites = {G.clientVersion .. "/Tibia.spr", ""},
+      data = {G.clientVersion .. "/Nexoria.dat", ""},
+      sprites = {G.clientVersion .. "/Nexoria.spr", ""},
     }  
     incorrectThings = validateThings(things)
   end
@@ -473,15 +473,15 @@ function EnterGame.doLogin(account, password, token, host)
   end
   
   local things = {
-    data = {G.clientVersion .. "/Tibia.dat", ""},
-    sprites = {G.clientVersion .. "/Tibia.cwm", ""},
+    data = {G.clientVersion .. "/Nexoria.dat", ""},
+    sprites = {G.clientVersion .. "/Nexoria.cwm", ""},
   }
   
   local incorrectThings = validateThings(things)
   if #incorrectThings > 0 then
     things = {
-      data = {G.clientVersion .. "/Tibia.dat", ""},
-      sprites = {G.clientVersion .. "/Tibia.spr", ""},
+      data = {G.clientVersion .. "/Nexoria.dat", ""},
+      sprites = {G.clientVersion .. "/Nexoria.spr", ""},
     }  
     incorrectThings = validateThings(things)
   end

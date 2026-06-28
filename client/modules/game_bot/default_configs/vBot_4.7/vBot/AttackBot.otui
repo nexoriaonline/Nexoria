@@ -252,7 +252,7 @@ AttackBotPanel < Panel
     margin-top: 5
     size: 405 15
     text: monster names
-    font: cipsoftFont
+    font: nexoriaFont
     background: #363636
 
   Label
@@ -367,7 +367,7 @@ AttackBotPanel < Panel
     size: 60 17
     text: Move Up
     text-align: center
-    font: cipsoftFont
+    font: nexoriaFont
     margin-top: 7
     margin-right: 8
 
@@ -379,7 +379,7 @@ AttackBotPanel < Panel
     margin-right: 5
     text: Move Down
     text-align: center
-    font: cipsoftFont
+    font: nexoriaFont
   
   Button
     id: addEntry
@@ -388,7 +388,7 @@ AttackBotPanel < Panel
     size: 40 19
     text-align: center
     text: New
-    font: cipsoftFont
+    font: nexoriaFont
 
   BotItem
     id: itemId
@@ -407,7 +407,7 @@ AttackBotPanel < Panel
     height: 15
     text: spell name
     background: #363636
-    font: cipsoftFont
+    font: nexoriaFont
     visible: false
 
 SettingsPanel < Panel
@@ -613,12 +613,12 @@ AttackBotWindow < MainWindow
     anchors.bottom: parent.bottom
     size: 45 21
     text: Close
-    font: cipsoftFont
+    font: nexoriaFont
 
   Button
     id: settings
     anchors.left: parent.left
     anchors.verticalCenter: prev.verticalCenter
     size: 50 21
-    font: cipsoftFont
+    font: nexoriaFont
     text: Settings

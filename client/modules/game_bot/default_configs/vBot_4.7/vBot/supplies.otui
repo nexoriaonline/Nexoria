@@ -187,7 +187,7 @@ SuppliesWindow < MainWindow
     anchors.top: prev.bottom
     size: 35 15
     text: New
-    font: cipsoftFont
+    font: nexoriaFont
     tooltip: Create new supplies profile.
 
   VerticalScrollBar
@@ -218,7 +218,7 @@ SuppliesWindow < MainWindow
   Button
     id: closeButton
     !text: tr('Close')
-    font: cipsoftFont
+    font: nexoriaFont
     anchors.right: parent.right
     anchors.bottom: parent.bottom
     size: 45 21

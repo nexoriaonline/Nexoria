@@ -196,7 +196,7 @@ SpellHealing < FlatPanel
     anchors.bottom: spellList.bottom
     text: Add
     size: 40 17
-    font: cipsoftFont
+    font: nexoriaFont
 
   Button
     id: MoveUp
@@ -205,7 +205,7 @@ SpellHealing < FlatPanel
     margin-right: 5
     text: Move Up
     size: 55 17
-    font: cipsoftFont
+    font: nexoriaFont
 
   Button
     id: MoveDown
@@ -214,7 +214,7 @@ SpellHealing < FlatPanel
     margin-right: 5
     text: Move Down
     size: 55 17
-    font: cipsoftFont  
+    font: nexoriaFont  
 
 ItemHealing < FlatPanel
   size: 490 120
@@ -309,7 +309,7 @@ ItemHealing < FlatPanel
     anchors.bottom: itemList.bottom
     text: Add
     size: 40 17
-    font: cipsoftFont
+    font: nexoriaFont
 
   Button
     id: MoveUp
@@ -318,7 +318,7 @@ ItemHealing < FlatPanel
     margin-right: 5
     text: Move Up
     size: 55 17
-    font: cipsoftFont
+    font: nexoriaFont
 
   Button
     id: MoveDown
@@ -327,7 +327,7 @@ ItemHealing < FlatPanel
     margin-right: 5
     text: Move Down
     size: 55 17
-    font: cipsoftFont
+    font: nexoriaFont
 
 HealerPanel < Panel
   size: 510 275
@@ -477,7 +477,7 @@ HealWindow < MainWindow
   Button
     id: closeButton
     !text: tr('Close')
-    font: cipsoftFont
+    font: nexoriaFont
     anchors.right: parent.right
     anchors.bottom: parent.bottom
     size: 45 21
@@ -486,7 +486,7 @@ HealWindow < MainWindow
   Button
     id: settingsButton
     !text: tr('Settings')
-    font: cipsoftFont
+    font: nexoriaFont
     anchors.left: parent.left
     anchors.bottom: parent.bottom
     size: 45 21

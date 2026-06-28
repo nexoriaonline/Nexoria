@@ -1,5 +1,5 @@
 SideActionButton < UIButton
-  font: cipsoftFont
+  font: nexoriaFont
   height: 36
   padding: 1
   margin-top: 1
@@ -46,7 +46,7 @@ SideActionButton < UIButton
     text-auto-resize: true
     text-wrap: false
     phantom: true
-    font: cipsoftFont
+    font: nexoriaFont
     color: white
     background: #292A2A
 

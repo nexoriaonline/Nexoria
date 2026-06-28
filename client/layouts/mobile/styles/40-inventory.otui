@@ -104,7 +104,7 @@ InventoryButton < Button
 SoulCapLabel < GameLabel
   text-align: center
   color: #FFFFFF
-  font: cipsoftFont
+  font: nexoriaFont
   margin-top: 4
   text-offset: 0 3
   width: 36
