@@ -1,0 +1,31 @@
+HotkeyButton < UIButton
+  size: 48 48
+  image-source: /images/ui/button
+  image-border: 4
+  font: verdana-11px-antialised
+  color: #FFFFFF
+  anchors.right: parent.right
+  margin-right: 10
+
+UIWidget
+  id: mobileHotkeys
+  anchors.fill: parent
+  phantom: true
+
+  HotkeyButton
+    id: hotkey1
+    anchors.bottom: parent.bottom
+    margin-bottom: 200
+    !text: 'F1'
+
+  HotkeyButton
+    id: hotkey2
+    anchors.bottom: prev.top
+    margin-bottom: 10
+    !text: 'F2'
+
+  HotkeyButton
+    id: hotkey3
+    anchors.bottom: prev.top
+    margin-bottom: 10
+    !text: 'F3'

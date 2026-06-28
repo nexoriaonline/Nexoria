@@ -1,4 +1,5 @@
 InventoryItem < Item
+  size: 40 40
   $on:
     image-source: /images/ui/item-blessed
 
@@ -126,7 +127,7 @@ MountButton < CombatBox
 
 InventoryWindow < MiniWindow
   icon: /images/topbuttons/inventory
-  height: 200
+  height: 250
   id: inventoryWindow
   @onClose: modules.game_inventory.onMiniWindowClose()
   &save: true

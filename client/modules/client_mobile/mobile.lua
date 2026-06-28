@@ -167,50 +167,85 @@ end
 function executeWalk()
   removeEvent(keypadEvent)
   keypadEvent = nil
+  
   if not modules.game_walking or not g_mouse.isPressed(MouseTouch) then
+    keypad.pointer:setMarginTop(0)
+    keypad.pointer:setMarginLeft(0)
+    keypadTicks = 0
+    return
+  end
+
+  -- Otimização do intervalo de agendamento para evitar lag e sobrecarga
+  keypadEvent = scheduleEvent(executeWalk, 50)
+  
+  keypadMousePos.x = math.min(1, math.max(0, keypadMousePos.x))
+  keypadMousePos.y = math.min(1, math.max(0, keypadMousePos.y))
+  
+  local dx = keypadMousePos.x - 0.5
+  local dy = keypadMousePos.y - 0.5
+  local dist = math.sqrt(dx*dx + dy*dy)
+  
+  -- Deadzone para evitar movimentos acidentais
+  if dist < 0.05 then
     keypad.pointer:setMarginTop(0)
     keypad.pointer:setMarginLeft(0)
     return
   end
-  keypadEvent = scheduleEvent(executeWalk, 20)
-  keypadMousePos.x = math.min(1, math.max(0, keypadMousePos.x))
-  keypadMousePos.y = math.min(1, math.max(0, keypadMousePos.y))
-  local angle = math.atan2(keypadMousePos.x - 0.5, keypadMousePos.y - 0.5)
+
+  local angle = math.atan2(dx, dy)
   local maxTop = math.abs(math.cos(angle)) * 75
-  local marginTop = math.max(-maxTop, math.min(maxTop, (keypadMousePos.y - 0.5) * 150))
+  local marginTop = math.max(-maxTop, math.min(maxTop, dy * 150))
   local maxLeft = math.abs(math.sin(angle)) * 75
-  local marginLeft = math.max(-maxLeft, math.min(maxLeft, (keypadMousePos.x - 0.5) * 150))
+  local marginLeft = math.max(-maxLeft, math.min(maxLeft, dx * 150))
+  
   keypad.pointer:setMarginTop(marginTop)
   keypad.pointer:setMarginLeft(marginLeft)
+  
   local dir
-  if keypadMousePos.y < 0.3 and keypadMousePos.x < 0.3 then
+  -- Detecção de diagonais com margem maior (0.35 para maior precisão no touch)
+  if keypadMousePos.y < 0.35 and keypadMousePos.x < 0.35 then
     dir = Directions.NorthWest     
-  elseif keypadMousePos.y < 0.3 and keypadMousePos.x > 0.7 then
+  elseif keypadMousePos.y < 0.35 and keypadMousePos.x > 0.65 then
     dir = Directions.NorthEast
-  elseif keypadMousePos.y > 0.7 and keypadMousePos.x < 0.3 then
+  elseif keypadMousePos.y > 0.65 and keypadMousePos.x < 0.35 then
     dir = Directions.SouthWest
-  elseif keypadMousePos.y > 0.7 and keypadMousePos.x > 0.7 then
+  elseif keypadMousePos.y > 0.65 and keypadMousePos.x > 0.65 then
     dir = Directions.SouthEast
   end
-  if not dir and (math.abs(keypadMousePos.y - 0.5) > 0.1 or math.abs(keypadMousePos.x - 0.5) > 0.1) then
-    if math.abs(keypadMousePos.y - 0.5) > math.abs(keypadMousePos.x - 0.5) then
-      if keypadMousePos.y < 0.5 then
-        dir = Directions.North
-      else
-        dir = Directions.South
-      end
+  
+  if not dir then
+    if math.abs(dy) > math.abs(dx) then
+      dir = dy < 0 and Directions.North or Directions.South
     else
-      if keypadMousePos.x < 0.5 then
-        dir = Directions.West
-      else
-        dir = Directions.East
-      end    
+      dir = dx < 0 and Directions.West or Directions.East
     end  
   end
+  
   if dir then
+    -- Aumenta a velocidade de repetição após o primeiro passo
     modules.game_walking.walk(dir, keypadTicks)
     if keypadTicks == 0 then
-      keypadTicks = 100
+      keypadTicks = 1 -- Valor inicial pequeno para o primeiro passo
+    else
+      keypadTicks = g_clock.millis() -- Usa o tempo atual para sincronizar com a engine de walk
     end
   end
 end
+
+local hotkeysWindow
+
+function setupHotkeys()
+  if hotkeysWindow then return end
+  hotkeysWindow = g_ui.displayUI('hotkeys')
+  
+  local h1 = hotkeysWindow:getChildById('hotkey1')
+  h1.onClick = function() g_game.talk('exura') end -- Exemplo, pode ser mapeado para as hotkeys reais do jogo
+
+  local h2 = hotkeysWindow:getChildById('hotkey2')
+  h2.onClick = function() g_game.talk('exori vis') end
+
+  local h3 = hotkeysWindow:getChildById('hotkey3')
+  h3.onClick = function() modules.game_hotkeys.useHotkey(1) end
+end
+
+-- Adicionar chamada no init() original se necessário ou via hook
