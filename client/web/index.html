@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Nexoria Online - Web MMORPG</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+            color: #fff;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        #loginScreen {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+            z-index: 1000;
+        }
+
+        .login-container {
+            background: rgba(20, 25, 50, 0.95);
+            border: 2px solid #00d4ff;
+            border-radius: 10px;
+            padding: 40px;
+            width: 90%;
+            max-width: 350px;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .login-container h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #00d4ff;
+            font-size: 28px;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #00d4ff;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid #00d4ff;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+            border: none;
+            color: #000;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .login-btn:hover {
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+            transform: scale(1.02);
+        }
+
+        #gameScreen {
+            display: none;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            position: relative;
+        }
+
+        #gameCanvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .ui-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            z-index: 100;
+        }
+
+        .hotkey-btn {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+            border: 2px solid #00d4ff;
+            color: #000;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s ease;
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+        }
+
+        .hotkey-btn:active {
+            transform: scale(0.95);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+        }
+
+        .joystick-container {
+            position: absolute;
+            bottom: 100px;
+            left: 20px;
+            width: 120px;
+            height: 120px;
+            background: rgba(0, 212, 255, 0.1);
+            border: 2px solid #00d4ff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .joystick-stick {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+            position: absolute;
+            cursor: grab;
+        }
+
+        .joystick-stick:active {
+            cursor: grabbing;
+        }
+
+        .inventory-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+            border: 2px solid #00d4ff;
+            border-radius: 5px;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 20px;
+            z-index: 100;
+        }
+
+        .inventory-btn:active {
+            transform: scale(0.95);
+        }
+
+        .status-bar {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 212, 255, 0.1);
+            border: 2px solid #00d4ff;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 12px;
+            z-index: 100;
+            min-width: 200px;
+        }
+
+        .status-bar div {
+            margin: 5px 0;
+        }
+
+        .error-message {
+            color: #ff4444;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 12px;
+        }
+
+        .loading {
+            text-align: center;
+            color: #00d4ff;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="loginScreen">
+        <div class="login-container">
+            <h1>🛡️ NEXORIA</h1>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="account">Conta</label>
+                    <input type="text" id="account" placeholder="Digite sua conta" value="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" placeholder="Digite sua senha" value="1" required>
+                </div>
+                <button type="submit" class="login-btn">Entrar no Jogo</button>
+                <div class="error-message" id="errorMessage"></div>
+                <div class="loading" id="loadingMessage" style="display: none;">Conectando...</div>
+            </form>
+        </div>
+    </div>
+
+    <div id="gameScreen">
+        <canvas id="gameCanvas"></canvas>
+        
+        <div class="status-bar">
+            <div>🎮 <span id="playerName">Jogador</span></div>
+            <div>❤️ HP: <span id="playerHP">100/100</span></div>
+            <div>⚡ Mana: <span id="playerMana">100/100</span></div>
+            <div>📍 Pos: <span id="playerPos">0,0</span></div>
+        </div>
+
+        <button class="inventory-btn" id="inventoryBtn">📦</button>
+
+        <div class="joystick-container">
+            <div class="joystick-stick" id="joystickStick"></div>
+        </div>
+
+        <div class="ui-container">
+            <button class="hotkey-btn" data-key="1">F1</button>
+            <button class="hotkey-btn" data-key="2">F2</button>
+            <button class="hotkey-btn" data-key="3">F3</button>
+        </div>
+    </div>
+
+    <script>
+        // Configuração do cliente web
+        const loginScreen = document.getElementById('loginScreen');
+        const gameScreen = document.getElementById('gameScreen');
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const loginForm = document.getElementById('loginForm');
+        const errorMessage = document.getElementById('errorMessage');
+        const loadingMessage = document.getElementById('loadingMessage');
+
+        // Redimensionar canvas
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        // Joystick
+        const joystickStick = document.getElementById('joystickStick');
+        const joystickContainer = document.querySelector('.joystick-container');
+        let joystickActive = false;
+        let playerX = canvas.width / 2;
+        let playerY = canvas.height / 2;
+
+        joystickContainer.addEventListener('touchstart', (e) => {
+            joystickActive = true;
+        });
+
+        joystickContainer.addEventListener('touchmove', (e) => {
+            if (!joystickActive) return;
+            const touch = e.touches[0];
+            const rect = joystickContainer.getBoundingClientRect();
+            const x = touch.clientX - rect.left - 60;
+            const y = touch.clientY - rect.top - 60;
+            const distance = Math.min(30, Math.sqrt(x * x + y * y));
+            const angle = Math.atan2(y, x);
+            joystickStick.style.left = (60 + Math.cos(angle) * distance) + 'px';
+            joystickStick.style.top = (60 + Math.sin(angle) * distance) + 'px';
+        });
+
+        joystickContainer.addEventListener('touchend', () => {
+            joystickActive = false;
+            joystickStick.style.left = '30px';
+            joystickStick.style.top = '30px';
+        });
+
+        // Login
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const account = document.getElementById('account').value;
+            const password = document.getElementById('password').value;
+
+            loadingMessage.style.display = 'block';
+            errorMessage.textContent = '';
+
+            // Simular conexão (em produção, seria WebSocket real)
+            setTimeout(() => {
+                if (account && password) {
+                    loginScreen.style.display = 'none';
+                    gameScreen.style.display = 'block';
+                    document.getElementById('playerName').textContent = account;
+                    loadingMessage.style.display = 'none';
+                    startGame();
+                } else {
+                    errorMessage.textContent = 'Credenciais inválidas!';
+                    loadingMessage.style.display = 'none';
+                }
+            }, 1000);
+        });
+
+        // Renderização do jogo
+        function startGame() {
+            function gameLoop() {
+                // Limpar canvas com gradiente
+                const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+                gradient.addColorStop(0, '#0a0e27');
+                gradient.addColorStop(1, '#1a1f3a');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                // Desenhar grid
+                ctx.strokeStyle = 'rgba(0, 212, 255, 0.1)';
+                ctx.lineWidth = 1;
+                for (let i = 0; i < canvas.width; i += 32) {
+                    ctx.beginPath();
+                    ctx.moveTo(i, 0);
+                    ctx.lineTo(i, canvas.height);
+                    ctx.stroke();
+                }
+                for (let i = 0; i < canvas.height; i += 32) {
+                    ctx.beginPath();
+                    ctx.moveTo(0, i);
+                    ctx.lineTo(canvas.width, i);
+                    ctx.stroke();
+                }
+
+                // Desenhar jogador
+                ctx.fillStyle = '#00d4ff';
+                ctx.beginPath();
+                ctx.arc(playerX, playerY, 15, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Aura do jogador
+                ctx.strokeStyle = 'rgba(0, 212, 255, 0.3)';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.arc(playerX, playerY, 25, 0, Math.PI * 2);
+                ctx.stroke();
+
+                // Atualizar posição
+                document.getElementById('playerPos').textContent = Math.floor(playerX / 32) + ',' + Math.floor(playerY / 32);
+
+                requestAnimationFrame(gameLoop);
+            }
+            gameLoop();
+        }
+
+        // Hotkeys
+        document.querySelectorAll('.hotkey-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const key = btn.dataset.key;
+                console.log('Hotkey F' + key + ' pressionada!');
+                // Aqui você adicionaria a lógica de magias/poções
+            });
+        });
+
+        // Inventário
+        document.getElementById('inventoryBtn').addEventListener('click', () => {
+            alert('Inventário (em desenvolvimento)');
+        });
+
+        console.log('🎮 Nexoria Online Web - Pronto para jogar!');
+    </script>
+</body>
+</html>
