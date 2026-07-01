@@ -1,0 +1,33 @@
+# Godot
+.godot/
+*.exe
+*.so
+*.dylib
+*.dll
+*.pdb
+*.pdb.meta
+*.mdb
+*.mdb.meta
+*.rsp
+*.rsp.meta
+*.tres.meta
+*.tscn.meta
+*.gd.meta
+*.cs.meta
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build
+bin/
+obj/
+dist/
+build/
