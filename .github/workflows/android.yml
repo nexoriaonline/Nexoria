@@ -13,38 +13,43 @@ jobs:
         with:
           submodules: recursive
 
-      - name: set up JDK 11
+      - name: set up JDK 17
         uses: actions/setup-java@v3
         with:
-          java-version: '11'
+          java-version: '17'
           distribution: 'temurin'
           cache: gradle
 
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Install Dependencies
+      - name: Build Nexoria APK
         run: |
-          sudo apt-get update
-          sudo apt-get install -y build-essential cmake git libglu1-mesa-dev freeglut3-dev libopenal-dev libvorbis-dev libogg-dev libcurl4-openssl-dev libfreetype6-dev libglew-dev libbz2-dev
+          # Usar o repositório de build oficial e estável para Android
+          git clone --recursive https://github.com/OTCv8/otclientv8-android-build.git build-env
+          
+          # Limpar assets padrão e colocar os do Nexoria
+          rm -rf build-env/app/src/main/assets/*
+          mkdir -p build-env/app/src/main/assets/
+          cp -r client/data build-env/app/src/main/assets/
+          cp -r client/modules build-env/app/src/main/assets/
+          cp client/init.lua build-env/app/src/main/assets/
+          
+          # Adicionar gráficos (things)
+          mkdir -p build-env/app/src/main/assets/data/things/860
+          cp client/android/assets/data/things/860/Nexoria.dat build-env/app/src/main/assets/data/things/860/
+          cp client/android/assets/data/things/860/Nexoria.spr build-env/app/src/main/assets/data/things/860/
+          
+          # Ajustar nome do App no Manifesto Android
+          sed -i 's/android:label="OTCv8"/android:label="Nexoria Online"/g' build-env/app/src/main/AndroidManifest.xml
+          
+          # Compilar
+          cd build-env
+          chmod +x gradlew
+          ./gradlew assembleDebug
 
-      - name: Build Android APK
-        run: |
-          git clone https://github.com/OTCv8/otcv8-dev.git dev
-          cd dev
-          mkdir build-android && cd build-android
-          cmake .. -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_LATEST_HOME/build/cmake/android.toolchain.cmake -DANDROID_ABI=armeabi-v7a -DANDROID_PLATFORM=android-21 -DANDROID_STL=c++_static
-          make -j$(nproc)
-          
-      - name: Prepare Assets
-        run: |
-          mkdir -p assets
-          cp -r client/data assets/
-          cp -r client/modules assets/
-          cp client/init.lua assets/
-          
       - name: Upload Nexoria APK
         uses: actions/upload-artifact@v3
         with:
-          name: Nexoria-Online-Android
-          path: dev/build-android/*.apk
+          name: Nexoria-Online-Final
+          path: build-env/app/build/outputs/apk/debug/*.apk
