@@ -35,10 +35,10 @@ jobs:
           cp -r client/modules build-env/app/src/main/assets/
           cp client/init.lua build-env/app/src/main/assets/
           
-          # Adicionar gráficos (things)
+          # Adicionar gráficos (things) via download automático
           mkdir -p build-env/app/src/main/assets/data/things/860
-          cp client/android/assets/data/things/860/Nexoria.dat build-env/app/src/main/assets/data/things/860/
-          cp client/android/assets/data/things/860/Nexoria.spr build-env/app/src/main/assets/data/things/860/
+          wget https://github.com/vinisdl/tibia-client-860-linux/raw/master/Tibia.dat -O build-env/app/src/main/assets/data/things/860/Nexoria.dat
+          wget https://github.com/vinisdl/tibia-client-860-linux/raw/master/Tibia.spr -O build-env/app/src/main/assets/data/things/860/Nexoria.spr
           
           # Ajustar nome do App no Manifesto Android
           sed -i 's/android:label="OTCv8"/android:label="Nexoria Online"/g' build-env/app/src/main/AndroidManifest.xml
