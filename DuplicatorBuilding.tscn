@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://bg41tvj4mijbf"]
+
+[ext_resource type="Script" uid="uid://bmgdro1q4xpft" path="res://DuplicatorBuilding.cs" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://b2kw0jedbiu8g" path="res://The Fan-tasy Tileset (Free)/Art/Props/Atlas/Props.png" id="2_props"]
+[ext_resource type="Script" uid="uid://du540swb1ku33" path="res://BuildingEffect.cs" id="2_tbpg3"]
+[ext_resource type="Script" uid="uid://cmkgxi6w2j23d" path="res://DuplicatePlantBuildingEffect.cs" id="3_vu541"]
+
+[sub_resource type="Resource" id="Resource_0yyup"]
+script = ExtResource("3_vu541")
+metadata/_custom_type_script = "uid://cmkgxi6w2j23d"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rhcix"]
+atlas = ExtResource("2_props")
+region = Rect2(109.37932, -0.74982643, 37.59845, 33.456245)
+
+[node name="DuplicatorBuilding" type="Node2D" unique_id=1333975929 node_paths=PackedStringArray("Sprite")]
+script = ExtResource("1_script")
+BuildingCost = 1500.0
+BuildingName = "Duplicator"
+AuraRadius = 96.0
+Effects = Array[ExtResource("2_tbpg3")]([SubResource("Resource_0yyup")])
+Sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1173701080]
+texture = SubResource("AtlasTexture_rhcix")

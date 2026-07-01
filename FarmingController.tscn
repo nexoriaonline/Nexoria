@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://c8e3ijefbkj0y"]
+
+[ext_resource type="Script" uid="uid://clj1768xvt70y" path="res://FarmingController.cs" id="1_6t25f"]
+
+[node name="FarmingController" type="Node2D" unique_id=1586962587 node_paths=PackedStringArray("LocalTimer")]
+script = ExtResource("1_6t25f")
+LocalTimer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="." unique_id=978765021]

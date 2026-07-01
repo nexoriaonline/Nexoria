@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://bltcxorpyn58f"]
+
+[ext_resource type="Script" uid="uid://bw8gbva32j3fu" path="res://CombinerBuilding.cs" id="1_script"]
+[ext_resource type="Script" uid="uid://du540swb1ku33" path="res://BuildingEffect.cs" id="2_bdv88"]
+[ext_resource type="Texture2D" uid="uid://b2kw0jedbiu8g" path="res://The Fan-tasy Tileset (Free)/Art/Props/Atlas/Props.png" id="2_props"]
+[ext_resource type="Script" uid="uid://c6c5kdpt51yf8" path="res://AutoMergeBuildingEffect.cs" id="3_3uns5"]
+
+[sub_resource type="Resource" id="Resource_vnjeh"]
+script = ExtResource("3_3uns5")
+metadata/_custom_type_script = "uid://c6c5kdpt51yf8"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bdv88"]
+atlas = ExtResource("2_props")
+region = Rect2(75.17528, 9.423744, 26.764984, 30.588566)
+
+[node name="CombinerBuilding" type="Node2D" unique_id=1631418487 node_paths=PackedStringArray("Sprite")]
+script = ExtResource("1_script")
+BuildingCost = 1800.0
+BuildingName = "Combiner"
+AuraRadius = 96.0
+Effects = Array[ExtResource("2_bdv88")]([SubResource("Resource_vnjeh")])
+Sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1418114897]
+texture = SubResource("AtlasTexture_bdv88")

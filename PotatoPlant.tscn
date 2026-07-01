@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://b17ktgn0fcuqn"]
+
+[ext_resource type="Script" uid="uid://d4elapjluj8mx" path="res://PotatoPlant.cs" id="1_rb5wd"]
+[ext_resource type="Texture2D" uid="uid://dqoh188jl8aks" path="res://Tiny Wonder Farm Free/objects&items/plants free.png" id="2_g1x36"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_04abs"]
+atlas = ExtResource("2_g1x36")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_78i1p"]
+atlas = ExtResource("2_g1x36")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_stjfh"]
+atlas = ExtResource("2_g1x36")
+region = Rect2(32, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_574bn"]
+atlas = ExtResource("2_g1x36")
+region = Rect2(48, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5pels"]
+atlas = ExtResource("2_g1x36")
+region = Rect2(64, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e68kd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_04abs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_78i1p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_stjfh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_574bn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5pels")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Node2D" type="Node2D" unique_id=121699960 node_paths=PackedStringArray("AnimatedSprite2D")]
+scale = Vector2(2, 2)
+script = ExtResource("1_rb5wd")
+BasePlantCost = 10.0
+BasePlantLevel = 1
+GatherCount = 3
+GrowthStateCount = 5
+TimeToChangeSingleState = 15.0
+AnimatedSprite2D = NodePath("AnimatedSprite2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=154109162]
+sprite_frames = SubResource("SpriteFrames_e68kd")

@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://c11wqufua22br"]
+
+[ext_resource type="Texture2D" uid="uid://dqoh188jl8aks" path="res://Tiny Wonder Farm Free/objects&items/plants free.png" id="1_b2ycd"]
+[ext_resource type="Script" uid="uid://bdbqxk4s7jblu" path="res://PumpkinPlant.cs" id="1_jhs80"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jhs80"]
+atlas = ExtResource("1_b2ycd")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lgi8s"]
+atlas = ExtResource("1_b2ycd")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_thg4i"]
+atlas = ExtResource("1_b2ycd")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ndqnh"]
+atlas = ExtResource("1_b2ycd")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3oxks"]
+atlas = ExtResource("1_b2ycd")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fkkhj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jhs80")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lgi8s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_thg4i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ndqnh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3oxks")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Node2D" type="Node2D" unique_id=406156865 node_paths=PackedStringArray("AnimatedSprite2D")]
+scale = Vector2(2, 2)
+script = ExtResource("1_jhs80")
+BasePlantCost = 5.0
+BasePlantLevel = 1
+GatherCount = 4
+GrowthStateCount = 5
+TimeToChangeSingleState = 10.0
+AnimatedSprite2D = NodePath("AnimatedSprite2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=974887998]
+sprite_frames = SubResource("SpriteFrames_fkkhj")

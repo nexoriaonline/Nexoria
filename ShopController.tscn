@@ -1,0 +1,266 @@
+[gd_scene format=4 uid="uid://pu7qri6pqswe"]
+
+[ext_resource type="Script" uid="uid://xm0kpaamas6h" path="res://ShopController.cs" id="1_anm2f"]
+[ext_resource type="Texture2D" uid="uid://1th7xmk2ra3b" path="res://Tiny Wonder Farm Free/tilemaps/farm bridges free.png" id="2_2qnbp"]
+[ext_resource type="Texture2D" uid="uid://5g3agxr2cwg2" path="res://Tiny Wonder Farm Free/tilemaps/spring farm tilemap.png" id="3_01bfv"]
+[ext_resource type="Texture2D" uid="uid://c64fann12jha1" path="res://The Fan-tasy Tileset (Free)/Art/Buildings/Atlas/Buildings.png" id="3_4vtsy"]
+[ext_resource type="Texture2D" uid="uid://dqb3c8kwryyvk" path="res://Tiny Wonder Farm Free/objects&items/items free.png" id="4_ddrq7"]
+[ext_resource type="Texture2D" uid="uid://b2kw0jedbiu8g" path="res://The Fan-tasy Tileset (Free)/Art/Props/Atlas/Props.png" id="5_ddrq7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r1k10"]
+atlas = ExtResource("5_ddrq7")
+region = Rect2(129.07103, 48.510674, 30.322968, 64.844536)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vinsr"]
+atlas = ExtResource("3_4vtsy")
+region = Rect2(146.07492, 30.79536, 60.2502, 84.002686)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s10wq"]
+atlas = ExtResource("5_ddrq7")
+region = Rect2(63.76236, 48.57093, 48.373955, 64.59517)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jfcnc"]
+atlas = ExtResource("5_ddrq7")
+region = Rect2(109.90604, -2.3655987, 37.279816, 36.642555)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i6gls"]
+atlas = ExtResource("5_ddrq7")
+region = Rect2(73.26349, 10.698269, 28.03952, 27.083626)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v12vl"]
+texture = ExtResource("2_2qnbp")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+8:1/0 = 0
+9:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+7:2/0 = 0
+8:2/0 = 0
+9:2/0 = 0
+10:2/0 = 0
+11:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+7:3/0 = 0
+8:3/0 = 0
+9:3/0 = 0
+10:3/0 = 0
+11:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+7:4/0 = 0
+8:4/0 = 0
+9:4/0 = 0
+10:4/0 = 0
+11:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+4:6/0 = 0
+5:6/0 = 0
+7:6/0 = 0
+8:6/0 = 0
+9:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+4:7/0 = 0
+5:7/0 = 0
+7:7/0 = 0
+8:7/0 = 0
+9:7/0 = 0
+0:8/0 = 0
+1:8/0 = 0
+2:8/0 = 0
+3:8/0 = 0
+4:8/0 = 0
+5:8/0 = 0
+6:8/0 = 0
+7:8/0 = 0
+8:8/0 = 0
+9:8/0 = 0
+0:9/0 = 0
+1:9/0 = 0
+2:9/0 = 0
+3:9/0 = 0
+4:9/0 = 0
+5:9/0 = 0
+6:9/0 = 0
+7:9/0 = 0
+8:9/0 = 0
+9:9/0 = 0
+7:10/0 = 0
+8:10/0 = 0
+9:10/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_01bfv"]
+sources/0 = SubResource("TileSetAtlasSource_v12vl")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4vtsy"]
+atlas = ExtResource("3_01bfv")
+region = Rect2(34.255104, 2.0020046, 42.958, 42.660713)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_adptb"]
+atlas = ExtResource("4_ddrq7")
+region = Rect2(1.5008202, 17.237167, 13.080635, 14.12114)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mlhhl"]
+atlas = ExtResource("4_ddrq7")
+region = Rect2(17.108398, 16.791235, 13.675209, 14.864359)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t448c"]
+atlas = ExtResource("4_ddrq7")
+region = Rect2(33.31055, 17.088524, 13.377922, 14.12114)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a0jaq"]
+atlas = ExtResource("4_ddrq7")
+region = Rect2(48.918125, 17.38581, 14.121147, 14.12114)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_inkts"]
+atlas = ExtResource("4_ddrq7")
+region = Rect2(65.120285, 17.088524, 14.4184265, 14.864361)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_um5t0"]
+atlas = ExtResource("5_ddrq7")
+region = Rect2(201.9888, 132.87523, 28.838623, 30.535019)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s0kyv"]
+atlas = ExtResource("5_ddrq7")
+region = Rect2(238.82166, 139.90062, 19.697174, 22.304153)
+
+[node name="ShopController" type="Node2D" unique_id=922992670]
+script = ExtResource("1_anm2f")
+BuildingShopIconMaxSize = 18.0
+ScarecrowBuildingShopIcon = SubResource("AtlasTexture_r1k10")
+WellBuildingShopIcon = SubResource("AtlasTexture_vinsr")
+LampBuildingShopIcon = SubResource("AtlasTexture_s10wq")
+DuplicatorBuildingShopIcon = SubResource("AtlasTexture_jfcnc")
+CombinerBuildingShopIcon = SubResource("AtlasTexture_i6gls")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=150208745]
+scale = Vector2(2, 2)
+tile_map_data = PackedByteArray("AAD5/wIAAAAAAAYAAAAGAAIAAAACAAYAAAD5//3/AAAAAAEAAAAGAP3/AAACAAEAAAD6//3/AAABAAEAAAD7//3/AAABAAEAAAD8//3/AAABAAEAAAD9//3/AAABAAEAAAD+//3/AAABAAEAAAD///3/AAABAAEAAAAAAP3/AAABAAEAAAABAP3/AAABAAEAAAACAP3/AAABAAEAAAADAP3/AAABAAEAAAAEAP3/AAABAAEAAAAFAP3/AAABAAEAAAAGAP7/AAACAAIAAAAGAP//AAACAAIAAAAGAAAAAAACAAIAAAAGAAEAAAACAAIAAAAFAAIAAAABAAYAAAAEAAIAAAABAAYAAAADAAIAAAABAAYAAAACAAIAAAABAAYAAAABAAIAAAABAAYAAAAAAAIAAAABAAYAAAD//wIAAAABAAYAAAD+/wIAAAABAAYAAAD9/wIAAAABAAYAAAD8/wIAAAABAAYAAAD7/wIAAAABAAYAAAD6/wIAAAABAAYAAAD5//7/AAAAAAIAAAD5////AAAAAAIAAAD5/wAAAAAAAAIAAAD5/wEAAAAAAAIAAAD6//7/AAABAAIAAAD7//7/AAABAAIAAAD8//7/AAABAAIAAAD9//7/AAABAAIAAAD+//7/AAABAAIAAAD///7/AAABAAIAAAAAAP7/AAABAAIAAAABAP7/AAABAAIAAAACAP7/AAABAAIAAAADAP7/AAABAAIAAAAEAP7/AAABAAIAAAAEAP//AAABAAIAAAAFAP//AAABAAIAAAAFAP7/AAABAAIAAAAFAAAAAAABAAIAAAAEAAAAAAABAAIAAAAEAAEAAAABAAIAAAADAAAAAAABAAIAAAADAP//AAABAAIAAAACAP//AAABAAIAAAACAAAAAAABAAIAAAADAAEAAAABAAIAAAAFAAEAAAABAAIAAAACAAEAAAABAAIAAAABAAAAAAABAAIAAAABAP//AAABAAIAAAAAAAAAAAABAAIAAAAAAAEAAAABAAIAAAD//wAAAAABAAIAAAABAAEAAAABAAIAAAAAAP//AAABAAIAAAD/////AAABAAIAAAD//wEAAAABAAIAAAD+////AAABAAIAAAD+/wAAAAABAAIAAAD9////AAABAAIAAAD9/wAAAAABAAIAAAD9/wEAAAABAAIAAAD+/wEAAAABAAIAAAD8/wAAAAABAAIAAAD8/wEAAAABAAIAAAD8////AAABAAIAAAD7////AAABAAIAAAD7/wAAAAABAAIAAAD7/wEAAAABAAIAAAD6////AAABAAIAAAD6/wAAAAABAAIAAAD6/wEAAAABAAIAAAA=")
+tile_set = SubResource("TileSet_01bfv")
+
+[node name="Sprite2D" type="Sprite2D" parent="TileMapLayer" unique_id=2135624908]
+position = Vector2(-78, -6.749996)
+scale = Vector2(0.71428573, 0.72619045)
+texture = SubResource("AtlasTexture_4vtsy")
+
+[node name="Sprite2D" type="Sprite2D" parent="TileMapLayer/Sprite2D" unique_id=1461001636]
+position = Vector2(0, -4.8196754)
+texture = SubResource("AtlasTexture_adptb")
+
+[node name="Label" type="Label" parent="TileMapLayer/Sprite2D" unique_id=696782392]
+offset_left = -9.099999
+offset_top = -1.721317
+offset_right = 16.100006
+offset_bottom = 21.278683
+text = "20"
+metadata/_edit_use_anchors_ = true
+
+[node name="Sprite2D2" type="Sprite2D" parent="TileMapLayer" unique_id=2130980830]
+position = Vector2(-38.5, -6.749998)
+scale = Vector2(0.71428573, 0.72619045)
+texture = SubResource("AtlasTexture_4vtsy")
+
+[node name="Sprite2D" type="Sprite2D" parent="TileMapLayer/Sprite2D2" unique_id=2045036702]
+position = Vector2(0, -4.8196754)
+texture = SubResource("AtlasTexture_mlhhl")
+
+[node name="Label" type="Label" parent="TileMapLayer/Sprite2D2" unique_id=182816709]
+offset_left = -9.099999
+offset_top = -2.409839
+offset_right = 17.5
+offset_bottom = 20.59016
+text = "40"
+metadata/_edit_use_anchors_ = true
+
+[node name="Sprite2D3" type="Sprite2D" parent="TileMapLayer" unique_id=1672612602]
+position = Vector2(-0.5, -6.749998)
+scale = Vector2(0.71428573, 0.72619045)
+texture = SubResource("AtlasTexture_4vtsy")
+
+[node name="Sprite2D" type="Sprite2D" parent="TileMapLayer/Sprite2D3" unique_id=50960003]
+position = Vector2(0, -4.8196754)
+texture = SubResource("AtlasTexture_t448c")
+
+[node name="Label" type="Label" parent="TileMapLayer/Sprite2D3" unique_id=1917487508]
+offset_left = -9.1
+offset_top = -1.7213142
+offset_right = 21.699999
+offset_bottom = 21.278687
+text = "80"
+metadata/_edit_use_anchors_ = true
+
+[node name="Sprite2D4" type="Sprite2D" parent="TileMapLayer" unique_id=392071583]
+position = Vector2(39.5, -7.249998)
+scale = Vector2(0.71428573, 0.72619045)
+texture = SubResource("AtlasTexture_4vtsy")
+
+[node name="Sprite2D" type="Sprite2D" parent="TileMapLayer/Sprite2D4" unique_id=148884132]
+position = Vector2(0, -4.8196754)
+texture = SubResource("AtlasTexture_a0jaq")
+
+[node name="Label" type="Label" parent="TileMapLayer/Sprite2D4" unique_id=172838143]
+offset_left = -14.0
+offset_top = -1.7213143
+offset_right = 26.0
+offset_bottom = 21.278687
+text = "160"
+metadata/_edit_use_anchors_ = true
+
+[node name="Sprite2D5" type="Sprite2D" parent="TileMapLayer" unique_id=598010453]
+position = Vector2(78, -6.7499943)
+scale = Vector2(0.71428573, 0.72619045)
+texture = SubResource("AtlasTexture_4vtsy")
+
+[node name="Sprite2D" type="Sprite2D" parent="TileMapLayer/Sprite2D5" unique_id=1662525359]
+position = Vector2(0, -4.8196754)
+texture = SubResource("AtlasTexture_inkts")
+
+[node name="Label" type="Label" parent="TileMapLayer/Sprite2D5" unique_id=569703977]
+offset_left = -11.9
+offset_top = -2.4098442
+offset_right = 28.1
+offset_bottom = 20.590157
+text = "320"
+
+[node name="ButtonBuildings" type="Sprite2D" parent="." unique_id=531831521]
+position = Vector2(169, -77)
+texture = SubResource("AtlasTexture_um5t0")
+
+[node name="ButtonPlants" type="Sprite2D" parent="." unique_id=1952544688]
+position = Vector2(198, -77)
+texture = SubResource("AtlasTexture_s0kyv")

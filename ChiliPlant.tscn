@@ -1,0 +1,108 @@
+[gd_scene format=3 uid="uid://d0hhv8k8xvc48"]
+
+[ext_resource type="Texture2D" uid="uid://dqoh188jl8aks" path="res://Tiny Wonder Farm Free/objects&items/plants free.png" id="1_bkhsc"]
+[ext_resource type="Script" uid="uid://bjjmjsw0lfplr" path="res://ChiliPlant.cs" id="1_prqph"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_prqph"]
+atlas = ExtResource("1_bkhsc")
+region = Rect2(0, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lkcnv"]
+atlas = ExtResource("1_bkhsc")
+region = Rect2(16, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_64m1r"]
+atlas = ExtResource("1_bkhsc")
+region = Rect2(32, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_06t3g"]
+atlas = ExtResource("1_bkhsc")
+region = Rect2(48, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_43qpp"]
+atlas = ExtResource("1_bkhsc")
+region = Rect2(64, 80, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cra0d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_prqph")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lkcnv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_64m1r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_06t3g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_43qpp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ogvk"]
+atlas = ExtResource("1_bkhsc")
+region = Rect2(0, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xkhpi"]
+atlas = ExtResource("1_bkhsc")
+region = Rect2(16, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e57u3"]
+atlas = ExtResource("1_bkhsc")
+region = Rect2(32, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aenws"]
+atlas = ExtResource("1_bkhsc")
+region = Rect2(48, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_22kr1"]
+atlas = ExtResource("1_bkhsc")
+region = Rect2(64, 64, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lu48b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ogvk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xkhpi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e57u3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aenws")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_22kr1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Node2D" type="Node2D" unique_id=698266307 node_paths=PackedStringArray("SecondAnimatedSprite2D", "AnimatedSprite2D")]
+scale = Vector2(2, 2)
+script = ExtResource("1_prqph")
+SecondAnimatedSprite2D = NodePath("AnimatedSprite2D/AnimatedSprite2D")
+BasePlantCost = 60.0
+BasePlantLevel = 1
+GatherCount = 5
+GrowthStateCount = 5
+TimeToChangeSingleState = 45.0
+AnimatedSprite2D = NodePath("AnimatedSprite2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=492297750]
+sprite_frames = SubResource("SpriteFrames_cra0d")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=1815232990]
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_lu48b")

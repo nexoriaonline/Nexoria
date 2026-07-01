@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://svmg04s6204i"]
+
+[ext_resource type="Texture2D" uid="uid://bg2r3q5lfxelt" path="res://Tiny Wonder Farm Free/objects&items/farm objects free.png" id="1_wjoo2"]
+[ext_resource type="Script" uid="uid://diwnyyyxl8xwe" path="res://TrashChest.cs" id="2_gewoh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wjoo2"]
+atlas = ExtResource("1_wjoo2")
+region = Rect2(17, 65, 15, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gewoh"]
+atlas = ExtResource("1_wjoo2")
+region = Rect2(17, 81, 15, 15)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ytxu8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wjoo2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gewoh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wjoo2"]
+size = Vector2(13.333334, 13.333334)
+
+[node name="TrashChest" type="AnimatedSprite2D" unique_id=2122199655]
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_ytxu8")
+script = ExtResource("2_gewoh")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=2088165610]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=983474284]
+position = Vector2(-0.66666675, 1)
+shape = SubResource("RectangleShape2D_wjoo2")

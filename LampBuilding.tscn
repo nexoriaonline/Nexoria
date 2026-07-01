@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://6whru6miy6xg"]
+
+[ext_resource type="Script" uid="uid://ckcfspxlxwj4" path="res://LampBuilding.cs" id="2_script"]
+[ext_resource type="Texture2D" uid="uid://b2kw0jedbiu8g" path="res://The Fan-tasy Tileset (Free)/Art/Props/Atlas/Props.png" id="2_xssqh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q6uyj"]
+atlas = ExtResource("2_xssqh")
+region = Rect2(64.22647, 49.443687, 48.050278, 62.512)
+
+[node name="LampBuilding" type="Node2D" unique_id=1628518700 node_paths=PackedStringArray("Sprite")]
+script = ExtResource("2_script")
+BuildingCost = 1000.0
+BuildingName = "Lamp"
+AuraRadius = 112.0
+GrowthSpeedBonus = 0.1
+HarvestGoldBonus = 0.1
+Sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1885964613]
+texture = SubResource("AtlasTexture_q6uyj")

@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dvgpypyn0o4xh"]
+
+[ext_resource type="Texture2D" uid="uid://c64fann12jha1" path="res://The Fan-tasy Tileset (Free)/Art/Buildings/Atlas/Buildings.png" id="2_mfpla"]
+[ext_resource type="Script" uid="uid://4dcu8tyid443" path="res://WellBuilding.cs" id="2_script"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_well"]
+atlas = ExtResource("2_mfpla")
+region = Rect2(143.40366, 30.52126, 64.914825, 83.35446)
+
+[node name="WellBuilding" type="Node2D" unique_id=1354208321 node_paths=PackedStringArray("Sprite")]
+script = ExtResource("2_script")
+BuildingCost = 750.0
+BuildingName = "Well"
+HarvestGoldBonus = 0.25
+Sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=174189435]
+texture = SubResource("AtlasTexture_well")

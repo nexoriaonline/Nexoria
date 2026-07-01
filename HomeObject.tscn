@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://d0on0ksnlybu0"]
+
+[ext_resource type="Texture2D" uid="uid://bg2r3q5lfxelt" path="res://Tiny Wonder Farm Free/objects&items/farm objects free.png" id="1_u72sk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u5vav"]
+atlas = ExtResource("1_u72sk")
+region = Rect2(6.4689484, 97.7511, 83.97133, 91.801575)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u72sk"]
+atlas = ExtResource("1_u72sk")
+region = Rect2(95.7914, 107.39556, 33.588516, 34.05503)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u72sk"]
+size = Vector2(81, 91)
+
+[node name="Sprite2D" type="Sprite2D" unique_id=1268345994]
+texture = SubResource("AtlasTexture_u5vav")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=919649599]
+position = Vector2(0, 30)
+scale = Vector2(0.8939394, 0.88235295)
+texture = SubResource("AtlasTexture_u72sk")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=982828473]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1691364071]
+position = Vector2(0.5, 1.5)
+shape = SubResource("RectangleShape2D_u72sk")
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="Area2D" unique_id=901172007]
+radius = 43.86
+affect_navigation_mesh = true

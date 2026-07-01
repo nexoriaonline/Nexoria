@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://xi3yc6qtck7o"]
+
+[ext_resource type="Script" uid="uid://ctialdwnfex5t" path="res://GoldIndicator.cs" id="1_nehp6"]
+[ext_resource type="Texture2D" uid="uid://1th7xmk2ra3b" path="res://Tiny Wonder Farm Free/tilemaps/farm bridges free.png" id="1_rxp5j"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nehp6"]
+atlas = ExtResource("1_rxp5j")
+region = Rect2(0.722744, 63.46199, 46.68144, 15.560478)
+
+[node name="GoldIndicator" type="Node2D" unique_id=936151866 node_paths=PackedStringArray("GoldLabel")]
+script = ExtResource("1_nehp6")
+GoldLabel = NodePath("Label")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1486990421]
+scale = Vector2(3, 3)
+texture = SubResource("AtlasTexture_nehp6")
+
+[node name="Label" type="Label" parent="." unique_id=1400577278]
+offset_left = -47.0
+offset_top = -9.0
+offset_right = 50.0
+offset_bottom = 21.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://djgdi63twrgy5"]
+
+[ext_resource type="Script" uid="uid://dhcgmlt0k4ijh" path="res://EconomyController.cs" id="1_ai5lx"]
+
+[node name="EconomyController" type="Node2D" unique_id=930634762]
+script = ExtResource("1_ai5lx")

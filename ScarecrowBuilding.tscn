@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cdp2pgvijbcck"]
+
+[ext_resource type="Texture2D" uid="uid://b2kw0jedbiu8g" path="res://The Fan-tasy Tileset (Free)/Art/Props/Atlas/Props.png" id="2_464r4"]
+[ext_resource type="Script" uid="uid://7s875qi5e6a0" path="res://ScarecrowBuilding.cs" id="2_script"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5qiy7"]
+atlas = ExtResource("2_464r4")
+region = Rect2(130.47054, 46.644646, 27.523956, 65.31104)
+
+[node name="ScarecrowBuilding" type="Node2D" unique_id=1203588050 node_paths=PackedStringArray("Sprite")]
+script = ExtResource("2_script")
+BuildingCost = 500.0
+BuildingName = "Scarecrow"
+AuraRadius = 96.0
+GrowthSpeedBonus = 5.0
+Sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1053411414]
+texture = SubResource("AtlasTexture_5qiy7")
