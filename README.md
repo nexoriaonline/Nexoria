@@ -1,32 +1,27 @@
-# Idle Farm Game
+# 🌾 NEXORIA - MMORPG DE FAZENDA ONLINE
 
-Idle Farm Game is a small Godot 4 C# farming project about planting crops, waiting for them to grow, collecting gold, and merging matching plants into stronger versions.
+Um MMORPG de fazenda online multiplayer completo e profissional.
 
-## Current Features
+## 📋 Status: Preparação de Terreno ✅
 
-- Shop-based crop purchasing and placement.
-- Plant growth stages with visual feedback.
-- Harvest animation and compact gold display.
-- Merge mechanic: drag two plants of the same type and level together to create a higher-level plant.
-- Optional plant level indicators with hover support.
-- Character harvesting behavior with simple wandering while idle.
+Estrutura básica criada e pronta para desenvolvimento.
 
-## Tech Stack
+## 🏗️ Estrutura
 
-- Godot 4.6
-- C#
-- .NET project: `AutoFarm.csproj`
-
-## Running
-
-Open the project folder in Godot 4.6 and run `MainScene.tscn`.
-
-You can also verify the C# project with:
-
-```powershell
-dotnet build
+```
+nexoria-mmorpg/
+├── backend/          # Node.js + Express + Socket.io
+├── frontend/         # React + WebSocket
+└── README.md
 ```
 
-## Notes
+## 🚀 Próximos Passos
 
-The project uses free pixel-art farm assets stored in the repository. IDE state such as `.vs/` is intentionally ignored and should not be committed.
+1. Implementar backend (Express + Socket.io)
+2. Criar frontend (React)
+3. Autenticação
+4. Sistema de fazenda multiplayer
+5. Economia dinâmica
+6. E muito mais...
+
+Veja `PROJECT.md` para documentação completa.
