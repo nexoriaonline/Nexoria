@@ -737,6 +737,9 @@ const Game = {
     ws: null,
     connected: false,
     loggedIn: false,
+    state: 'LOGIN', // 'LOGIN' ou 'GAME'
+    account: '',
+    password: '',
     player: {
         id: 0, name: '', x: 100, y: 100, z: 7,
         hp: 150, maxHp: 150, mp: 0, maxMp: 0,
@@ -758,7 +761,7 @@ const Game = {
     moveDelay: 200,
     attackInterval: null,
     spellCooldowns: {},
-    account: '1',
+    gameChallengeReceived: false,
     reconnectAttempts: 0,
     maxReconnect: 5
 };
@@ -889,8 +892,17 @@ class OutputBuffer {
 // WEBSOCKET E PROTOCOLO
 // ============================================================
 function connectToServer(account, password) {
-    addChat('Conectando ao servidor...', 'system');
+    Game.account = account;
+    Game.password = password;
+    Game.state = 'LOGIN';
+    
+    addChat('Conectando ao Login Server...', 'system');
     const wsUrl = WS_LOGIN_URL;
+    
+    if (Game.ws) {
+        Game.ws.close();
+    }
+
     try {
         Game.ws = new WebSocket(wsUrl);
         Game.ws.binaryType = 'arraybuffer';
@@ -902,7 +914,7 @@ function connectToServer(account, password) {
 
     Game.ws.onopen = () => {
         Game.connected = true;
-        addChat('Conexão estabelecida!', 'system');
+        addChat('Conectado ao Login Server!', 'system');
         sendLoginPacket(account, password);
     };
 
@@ -963,8 +975,109 @@ function sendLoginPacket(account, password) {
 
 function sendPacket(outBuf) {
     if (Game.ws && Game.ws.readyState === WebSocket.OPEN) {
-        Game.ws.send(outBuf.toArrayBuffer());
+        const data = outBuf.toArrayBuffer();
+        Game.ws.send(data);
     }
+}
+
+function parseCharacterList(buf) {
+    addChat('Recebendo lista de personagens...', 'system');
+    
+    // Pular MOTD se houver (0x14)
+    // No nosso caso, o TFS enviou 0x64 direto ou após 0x14
+    // Se o primeiro byte lido no loop foi 0x64, estamos aqui.
+    
+    const charCount = buf.readU8();
+    if (charCount === 0) {
+        showError('Nenhum personagem encontrado.');
+        return;
+    }
+    
+    const chars = [];
+    for (let i = 0; i < charCount; i++) {
+        const name = buf.readString();
+        const serverName = buf.readString();
+        const serverIp = buf.readU32();
+        const serverPort = buf.readU16();
+        chars.push({ name, serverName, serverIp, serverPort });
+    }
+    
+    const premiumDays = buf.readU16();
+    
+    addChat('Personagem encontrado: ' + chars[0].name, 'system');
+    
+    // Fechar conexão de login e abrir a de game
+    Game.ws.close();
+    
+    setTimeout(() => {
+        connectToGameServer(chars[0].name);
+    }, 500);
+}
+
+function connectToGameServer(charName) {
+    Game.state = 'GAME';
+    Game.player.name = charName;
+    
+    addChat('Conectando ao Game Server...', 'system');
+    const wsUrl = WS_GAME_URL;
+    
+    try {
+        Game.ws = new WebSocket(wsUrl);
+        Game.ws.binaryType = 'arraybuffer';
+    } catch(e) {
+        addChat('Erro ao conectar no Game: ' + e.message, 'system');
+        return;
+    }
+    
+    Game.ws.onopen = () => {
+        addChat('Conectado ao Game Server! Aguardando challenge...', 'system');
+        Game.gameChallengeReceived = false;
+        // Não enviar nada ainda, esperar o challenge do servidor
+    };
+    
+    Game.ws.onmessage = (evt) => {
+        try {
+            if (!Game.loggedIn && !Game.gameChallengeReceived) {
+                // Primeiro pacote no game é o challenge (0x1F)
+                const data = new Uint8Array(evt.data);
+                if (data.length >= 6) { // Header(2) + Adler(4) + Type(1)...
+                    Game.gameChallengeReceived = true;
+                    addChat('Challenge recebido, enviando login...', 'system');
+                    sendGameLoginPacket(charName);
+                }
+                return;
+            }
+            handleServerPacket(new Uint8Array(evt.data));
+        } catch(e) {
+            console.error('Erro no pacote de game:', e);
+        }
+    };
+    
+    Game.ws.onclose = () => {
+        if (!Game.loggedIn && Game.state === 'GAME') {
+            addChat('Conexão com Game Server fechada.', 'system');
+        }
+    };
+}
+
+function sendGameLoginPacket(charName) {
+    const out = new OutputBuffer();
+    // NÃO enviar Protocol ID (0x0A) pois server_sends_first é true no TFS
+    out.writeU16(2);               // OS
+    out.writeU16(860);             // Version
+    
+    // XTEA Key (usar a mesma gerada no login)
+    out.writeU32(Game.xteaKey[0]);
+    out.writeU32(Game.xteaKey[1]);
+    out.writeU32(Game.xteaKey[2]);
+    out.writeU32(Game.xteaKey[3]);
+    
+    out.writeU8(0);                // GM Mode
+    out.writeString(Game.account);
+    out.writeString(charName);
+    out.writeString(Game.password);
+    
+    sendPacket(out);
 }
 
 function handleServerPacket(data) {
@@ -1039,9 +1152,12 @@ function processPacket(type, buf) {
             sendPacket(pong);
             return true;
         }
-        case SERVER_PKT.FULL_MAP:
         case 0x64: {
-            parseFullMap(buf);
+            if (Game.state === 'LOGIN') {
+                parseCharacterList(buf);
+            } else {
+                parseFullMap(buf);
+            }
             return true;
         }
         case SERVER_PKT.MOVE_NORTH:
