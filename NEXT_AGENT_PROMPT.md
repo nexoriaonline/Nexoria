@@ -1,15 +1,22 @@
 # 🚀 PROMPT PARA O PRÓXIMO AGENTE - NEXORIA ONLINE
 
-## Acesso ao Repositório
+## ⚠️ IMPORTANTE: Leia Isto Primeiro
+
+Este é um projeto de **MMORPG Web baseado em Tibia 8.60**. O agente anterior (eu) preparou a base técnica, mas **você precisará criar seu próprio ambiente de testes local** pois os servidores temporários expiram quando a sessão termina.
+
+---
+
+## 📥 Acesso ao Repositório
 
 ```
 Link: https://github.com/nexoriaonline/Nexoria.git
-Token: [SOLICITAR AO PROPRIETÁRIO DO PROJETO]
 Email: nexoriaonline@gmail.com
 Nome: Nexoria Online
 ```
 
-### Configuração Git
+**IMPORTANTE:** Peça o token de acesso ao proprietário do projeto (não está incluído aqui por segurança).
+
+### Configuração Git Inicial
 ```bash
 git config --global user.email "nexoriaonline@gmail.com"
 git config --global user.name "Nexoria Online"
@@ -20,181 +27,243 @@ git pull origin main
 
 ---
 
-## 📊 Status Atual do Projeto
+## 🎯 Sua Missão
 
-O Nexoria Online é um **MMORPG Web baseado em Tibia 8.60** que está em fase de desenvolvimento ativo. O servidor está compilado e funcionando, o cliente Android foi otimizado, e agora temos um **cliente Web em HTML5/JavaScript** pronto para ser integrado com o servidor.
-
-### ✅ Concluído
-- Servidor TFS 8.60 compilado e rodando
-- Cliente Android com joystick otimizado
-- Cliente Web com interface neon azul
-- Rebranding completo (desvinculado do Tibia)
-- Hospedagem web local (porta 8080)
-
-### 🚧 Em Progresso
-- Integração WebSocket (cliente Web ↔ servidor TFS)
-- Renderização de sprites Tibia 8.60
-- Sistema de movimento e combate
-
----
-
-## 🎯 Tarefa Imediata para o Próximo Agente
-
-### Objetivo Principal
-**Conectar o cliente Web ao servidor TFS 8.60 e fazer o jogo funcionar de verdade.**
+**Objetivo Principal:** Fazer o **Nexoria Online Web funcionar de verdade** com o servidor TFS e o cliente Web se comunicando.
 
 Isso significa:
-1. O jogador consegue fazer login com credenciais reais
-2. O personagem aparece no mapa
-3. O movimento funciona (8 direções)
-4. Monstros aparecem e atacam
-5. Combate básico funciona
-
-### Passos Recomendados
-
-#### Passo 1: Entender a Arquitetura
-- Ler `/home/ubuntu/Nexoria/PROGRESS.md` para entender o que foi feito
-- Examinar o servidor TFS em `/home/ubuntu/Nexoria/server/`
-- Analisar o cliente Web em `/home/ubuntu/Nexoria/client/web/index.html`
-
-#### Passo 2: Implementar WebSocket no Cliente Web
-- Criar um arquivo `client.js` que implemente a lógica de conexão
-- Usar a biblioteca `ws` (WebSocket) para conectar ao servidor
-- Implementar protocolo de login (enviar account/password)
-- Implementar protocolo de game (receber posição, monstros, etc)
-
-#### Passo 3: Descompactar Sprites Tibia
-- Extrair arquivos `.spr` e `.dat` do diretório `/home/ubuntu/Nexoria/client/data/things/860/`
-- Converter para formato WebGL (PNG/WebP)
-- Criar um mapa de sprites em JavaScript
-
-#### Passo 4: Renderizar Gráficos
-- Substituir o Canvas simples por WebGL ou Pixi.js
-- Renderizar tiles do mapa
-- Renderizar personagem do jogador
-- Renderizar monstros
-
-#### Passo 5: Implementar Movimento
-- Capturar eventos do joystick
-- Enviar comando de movimento para o servidor
-- Atualizar posição do jogador na tela
+- ✅ Servidor TFS rodando localmente
+- ✅ Cliente Web acessível localmente
+- ✅ Login funcional (credenciais `1/1`)
+- ✅ Personagem aparecendo no mapa
+- ✅ Movimento básico funcionando
+- ✅ Monstros e combate básico
 
 ---
 
-## 📂 Arquivos Importantes
+## 📋 Checklist de Configuração Inicial
 
-| Arquivo | Descrição |
-|---------|-----------|
-| `/home/ubuntu/Nexoria/server/tfs` | Executável do servidor compilado |
-| `/home/ubuntu/Nexoria/server/config.lua` | Configuração do servidor |
-| `/home/ubuntu/Nexoria/client/web/index.html` | Interface Web principal |
-| `/home/ubuntu/Nexoria/client/data/things/860/Nexoria.dat` | Dados dos objetos |
-| `/home/ubuntu/Nexoria/client/data/things/860/Nexoria.spr` | Sprites dos gráficos |
-| `/home/ubuntu/Nexoria/PROGRESS.md` | Progresso detalhado |
+### Passo 1: Clonar e Analisar
+- [ ] Clonar o repositório
+- [ ] Ler `PROGRESS.md` para entender o que foi feito
+- [ ] Examinar a estrutura de pastas
+- [ ] Verificar os arquivos do servidor em `/server/`
+- [ ] Verificar os arquivos do cliente em `/client/web/`
+
+### Passo 2: Configurar o Servidor TFS Localmente
+- [ ] Navegar para `/server/`
+- [ ] Verificar se o executável `tfs` existe (se não, compilar com CMake)
+- [ ] Verificar se MariaDB está instalado (se não, instalar)
+- [ ] Iniciar o servidor: `./tfs`
+- [ ] Verificar logs em `server.log` para erros
+- [ ] Confirmar que o servidor está online (deve dizer "Forgotten Server Online!")
+
+### Passo 3: Configurar o Cliente Web Localmente
+- [ ] Navegar para `/client/web/`
+- [ ] Iniciar um servidor web local: `python3 -m http.server 8080`
+- [ ] Abrir no navegador: `http://localhost:8080`
+- [ ] Verificar se a interface de login aparece
+- [ ] Testar o joystick e os botões
+
+### Passo 4: Conectar Cliente ao Servidor (CRÍTICO)
+- [ ] Implementar WebSocket no `index.html`
+- [ ] Conectar ao servidor TFS na porta 7171 (login)
+- [ ] Implementar protocolo de autenticação
+- [ ] Testar login com credenciais `1/1`
+- [ ] Se funcionar, o personagem deve aparecer no mapa
+
+### Passo 5: Implementar Renderização de Gráficos
+- [ ] Descompactar `Nexoria.spr` e `Nexoria.dat`
+- [ ] Converter sprites para WebGL/Canvas
+- [ ] Renderizar o mapa
+- [ ] Renderizar o personagem do jogador
+- [ ] Renderizar monstros
+
+### Passo 6: Implementar Movimento e Combate
+- [ ] Capturar eventos do joystick
+- [ ] Enviar comandos de movimento para o servidor
+- [ ] Implementar ataque básico
+- [ ] Testar combate com monstros
+
+### Passo 7: Fazer Commit e Push
+- [ ] Testar tudo localmente
+- [ ] Fazer commit com mensagem descritiva
+- [ ] Fazer push para o GitHub
 
 ---
 
-## 🔗 Endereços e Credenciais
+## 📂 Estrutura do Repositório
 
-### Servidor TFS
 ```
-IP: 127.0.0.1
-Login Port: 7171
-Game Port: 7172
-Database: MariaDB (localhost)
+Nexoria/
+├── server/
+│   ├── src/                    # Código-fonte C++ do TFS
+│   ├── build/                  # Arquivos compilados
+│   ├── tfs                     # Executável (já compilado)
+│   ├── config.lua              # Configuração do servidor
+│   ├── data/                   # Dados do servidor (mapas, spawns, etc)
+│   └── server.log              # Log do servidor
+├── client/
+│   ├── web/                    # Cliente Web (HTML/CSS/JS)
+│   │   └── index.html          # Interface principal
+│   ├── modules/                # Módulos Lua (OTClient)
+│   ├── data/
+│   │   └── things/860/
+│   │       ├── Nexoria.dat     # Dados dos objetos
+│   │       └── Nexoria.spr     # Sprites dos gráficos
+│   └── Nexoria_Definitivo_V4.apk  # APK Android (opcional)
+├── docs/                       # Documentação
+├── PROGRESS.md                 # Progresso do projeto
+└── NEXT_AGENT_PROMPT.md        # Este arquivo
 ```
 
-### Cliente Web (Hospedagem Local)
-```
-URL: https://8080-i3pwfbaam2ht40ll616nu-1c8e114e.us2.manus.computer
-WebSocket Login: wss://8001-i3pwfbaam2ht40ll616nu-1c8e114e.us2.manus.computer
-WebSocket Game: wss://8002-i3pwfbaam2ht40ll616nu-1c8e114e.us2.manus.computer
+---
+
+## 🔧 Instalação de Dependências
+
+### Para Compilar o Servidor (se necessário)
+```bash
+sudo apt-get update
+sudo apt-get install -y build-essential cmake git libmariadb-dev libluajit-2.1-dev
+cd server
+mkdir build && cd build
+cmake ..
+make -j$(nproc)
 ```
 
-### Credenciais de Teste
+### Para Rodar o Servidor
+```bash
+sudo apt-get install -y mariadb-server
+sudo service mariadb start
+cd server
+./tfs
+```
+
+### Para o Cliente Web
+```bash
+# Já vem com Python
+python3 -m http.server 8080 --directory /path/to/client/web
+```
+
+---
+
+## 🌐 Endereços Locais (Você Criará)
+
+Quando você estiver testando localmente:
+
+```
+Servidor TFS:
+  - IP: 127.0.0.1
+  - Login Port: 7171
+  - Game Port: 7172
+
+Cliente Web:
+  - URL: http://localhost:8080
+  - WebSocket Login: ws://127.0.0.1:8001
+  - WebSocket Game: ws://127.0.0.1:8002
+```
+
+**Nota:** Você precisará configurar um proxy WebSocket (websockify) para encaminhar as conexões WebSocket para as portas TCP do servidor.
+
+---
+
+## 🔐 Credenciais de Teste
+
 ```
 Account: 1
 Password: 1
 ```
 
----
-
-## 💡 Dicas Importantes
-
-1. **Servidor Sempre Rodando:** O servidor TFS pode ser iniciado com:
-   ```bash
-   cd /home/ubuntu/Nexoria/server
-   ./tfs
-   ```
-
-2. **Logs do Servidor:** Verifique `/home/ubuntu/Nexoria/server/server.log` para erros
-
-3. **Protocolo Tibia:** O servidor TFS usa o protocolo Tibia 8.60. Você precisará implementar um cliente que entenda esse protocolo.
-
-4. **WebSocket Proxy:** O websockify está configurado para encaminhar tráfego WebSocket para as portas TCP do servidor.
-
-5. **Rebranding:** Todos os nomes foram alterados para "Nexoria". Mantenha essa identidade ao adicionar novos recursos.
+Essas credenciais estão pré-configuradas no banco de dados do servidor.
 
 ---
 
-## 🎨 Estilo Visual
+## 💡 Dicas Críticas
 
-O projeto usa um **tema Neon Azul (#00d4ff)** com fundo escuro. Mantenha essa identidade visual em todas as novas interfaces.
-
----
-
-## 📋 Checklist para Continuação
-
-- [ ] Clonar o repositório e fazer `git pull`
-- [ ] Iniciar o servidor TFS
-- [ ] Analisar o código do cliente Web
-- [ ] Implementar WebSocket no cliente
-- [ ] Testar conexão com credenciais `1/1`
-- [ ] Descompactar sprites Tibia
-- [ ] Renderizar primeiro sprite na tela
-- [ ] Implementar movimento básico
-- [ ] Implementar combate básico
-- [ ] Fazer commit e push para GitHub
-
----
-
-## 🚀 Comandos Úteis
-
+### 1. Servidor Sempre Rodando
+O servidor TFS deve estar rodando em um terminal enquanto você testa o cliente:
 ```bash
-# Clonar repositório
-git clone https://github.com/nexoriaonline/Nexoria.git
-cd Nexoria
-
-# Iniciar servidor
-cd server
+cd /home/ubuntu/Nexoria/server
 ./tfs
-
-# Verificar logs
-tail -f server.log
-
-# Fazer commit
-git add .
-git commit -m "Descrição das mudanças"
-git push origin main
 ```
 
+### 2. Verificar Logs
+Se algo não funcionar, sempre verifique os logs:
+```bash
+tail -f /home/ubuntu/Nexoria/server/server.log
+```
+
+### 3. WebSocket é Essencial
+Sem WebSocket, o cliente Web não consegue se comunicar com o servidor TFS. Você PRECISA implementar isso.
+
+### 4. Protocolo Tibia 8.60
+O servidor TFS usa o protocolo Tibia 8.60. Você precisará entender como esse protocolo funciona para implementar o cliente Web corretamente.
+
+### 5. Sprites Compactados
+Os arquivos `.spr` e `.dat` estão compactados. Você precisará descompactá-los antes de renderizar.
+
 ---
 
-## ❓ Perguntas Frequentes
+## 📚 Recursos Úteis
 
-**P: Como faço para testar o cliente Web?**  
-R: Abra o navegador em `https://8080-i3pwfbaam2ht40ll616nu-1c8e114e.us2.manus.computer` e use as credenciais `1/1`.
-
-**P: Como conecto o cliente Web ao servidor?**  
-R: Implemente WebSocket no `index.html` para conectar aos endereços `wss://8001...` e `wss://8002...`.
-
-**P: Onde estão os sprites do Tibia?**  
-R: Em `/home/ubuntu/Nexoria/client/data/things/860/Nexoria.spr` (arquivo compactado).
-
-**P: Como faço para adicionar novos monstros?**  
-R: Edite os arquivos de spawn do servidor em `/home/ubuntu/Nexoria/server/data/spawns/` e reinicie o servidor.
+- **Tibia Protocol:** Pesquise "Tibia 8.60 Protocol" para entender como funciona
+- **OTClient:** O código-fonte do OTClient pode ajudar a entender como renderizar sprites
+- **WebSocket:** Use a biblioteca `ws` do Node.js ou `WebSocket` nativo do navegador
+- **Canvas/WebGL:** Para renderização gráfica no navegador
 
 ---
 
-**Desenvolvido com ❤️ para o Nexoria Online**  
-**Última atualização:** 01/07/2026
+## 🚨 Problemas Comuns
+
+### "Servidor Offline"
+- Verifique se o servidor TFS está rodando
+- Verifique se MariaDB está rodando
+- Verifique os logs do servidor
+
+### "Conexão Recusada"
+- Verifique se as portas 7171 e 7172 estão abertas
+- Verifique se o WebSocket proxy está rodando
+- Verifique o firewall
+
+### "Sprite não aparece"
+- Verifique se os arquivos `.spr` e `.dat` foram descompactados corretamente
+- Verifique se o caminho para os arquivos está correto
+- Verifique o console do navegador para erros
+
+---
+
+## 📝 Recomendações para Continuação
+
+1. **Prioridade 1:** Fazer o servidor TFS rodar localmente
+2. **Prioridade 2:** Fazer o cliente Web se conectar ao servidor via WebSocket
+3. **Prioridade 3:** Implementar login real
+4. **Prioridade 4:** Renderizar sprites Tibia
+5. **Prioridade 5:** Implementar movimento
+6. **Prioridade 6:** Implementar combate
+
+---
+
+## 🎯 Quando Tudo Estiver Funcionando
+
+Depois que você conseguir fazer o jogo funcionar localmente:
+
+1. **Fazer commit e push** para o GitHub
+2. **Atualizar o PROGRESS.md** com o que foi feito
+3. **Preparar um novo prompt** para o próximo agente (se necessário)
+4. **Considerar migração para VPS** com IP fixo para hospedagem permanente
+
+---
+
+## 📞 Dúvidas?
+
+Se você tiver dúvidas sobre a arquitetura ou sobre como proceder, consulte:
+- `PROGRESS.md` - Status atual do projeto
+- `server/README.md` - Instruções do servidor
+- `client/web/index.html` - Código do cliente Web
+
+---
+
+**Boa sorte! O Nexoria Online está esperando por você! 🛡️🌌🚀**
+
+Desenvolvido com ❤️ para o Nexoria Online  
+Última atualização: 01/07/2026
