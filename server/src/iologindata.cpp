@@ -75,6 +75,7 @@ std::string decodeSecret(const std::string& secret)
 
 bool IOLoginData::loginserverAuthentication(const std::string& name, const std::string& password, Account& account)
 {
+	std::cout << "Auth attempt: " << name << " / " << password << std::endl;
 	Database& db = Database::getInstance();
 
 	DBResult_ptr result = db.storeQuery(fmt::format("SELECT `id`, `name`, `password`, `secret`, `type`, `premium_ends_at` FROM `accounts` WHERE `name` = {:s}", db.escapeString(name)));

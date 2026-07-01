@@ -724,11 +724,11 @@ const TILE_SIZE = 32;
 const VIEW_W = 15; // tiles visíveis horizontalmente
 const VIEW_H = 11; // tiles visíveis verticalmente
 const WS_LOGIN_URL = location.protocol === 'https:'
-    ? 'wss://' + location.hostname.replace('8080-','8001-') + '/websockify'
-    : 'ws://' + location.hostname + ':8001/websockify';
+    ? 'wss://' + location.hostname.replace('8080-','8001-')
+    : 'ws://' + location.hostname + ':8001';
 const WS_GAME_URL = location.protocol === 'https:'
-    ? 'wss://' + location.hostname.replace('8080-','8002-') + '/websockify'
-    : 'ws://' + location.hostname + ':8002/websockify';
+    ? 'wss://' + location.hostname.replace('8080-','8002-')
+    : 'ws://' + location.hostname + ':8002';
 
 // ============================================================
 // ESTADO DO JOGO
@@ -860,6 +860,14 @@ class NetworkBuffer {
 }
 
 class OutputBuffer {
+    adler32(data) {
+        let a = 1, b = 0;
+        for (let i = 0; i < data.length; i++) {
+            a = (a + data[i]) % 65521;
+            b = (b + a) % 65521;
+        }
+        return (b << 16) | a;
+    }
     constructor() { this.data = []; }
     writeU8(v) { this.data.push(v & 0xFF); }
     writeU16(v) { this.data.push(v & 0xFF, (v >> 8) & 0xFF); }
@@ -869,10 +877,10 @@ class OutputBuffer {
         for (let i = 0; i < s.length; i++) this.writeU8(s.charCodeAt(i));
     }
     toArrayBuffer() {
-        const buf = new ArrayBuffer(this.data.length + 2);
+        const buf = new ArrayBuffer(this.data.length + 6);
         const view = new DataView(buf);
-        view.setUint16(0, this.data.length, true);
-        for (let i = 0; i < this.data.length; i++) view.setUint8(i + 2, this.data[i]);
+        view.setUint16(0, this.data.length + 4, true); view.setUint32(2, this.adler32(this.data), true);
+        for (let i = 0; i < this.data.length; i++) view.setUint8(i + 6, this.data[i]);
         return buf;
     }
 }
@@ -884,7 +892,7 @@ function connectToServer(account, password) {
     addChat('Conectando ao servidor...', 'system');
     const wsUrl = WS_LOGIN_URL;
     try {
-        Game.ws = new WebSocket(wsUrl, ['binary']);
+        Game.ws = new WebSocket(wsUrl);
         Game.ws.binaryType = 'arraybuffer';
     } catch(e) {
         addChat('Erro ao conectar: ' + e.message, 'system');
@@ -926,19 +934,30 @@ function connectToServer(account, password) {
 }
 
 function sendLoginPacket(account, password) {
-    // Protocolo de login Tibia 8.60
+    // Protocolo de login Tibia 8.60 (Ajustado para TFS sem RSA)
     const out = new OutputBuffer();
-    out.writeU8(CLIENT_PKT.LOGIN); // tipo do pacote
-    out.writeU16(860);             // versão do cliente
-    out.writeU8(0);                // os type
-    out.writeU16(0);               // dat signature
-    out.writeU16(0);               // spr signature
-    out.writeU16(0);               // pic signature
-    out.writeU8(0);                // preview state
-    // XTEA key (4 x uint32)
-    out.writeU32(0); out.writeU32(0); out.writeU32(0); out.writeU32(0);
+    out.writeU8(1);                // Protocol ID (0x01) - Lido pelo ServicePort
+    out.writeU8(2);                // OS Type (2 = Windows) - Pulado pelo ProtocolLogin
+    out.writeU16(860);             // Versão do Cliente (860)
+    out.writeU32(0);               // Signature 1 (4 bytes)
+    out.writeU32(0);               // Signature 2 (4 bytes)
+    out.writeU32(0);               // Signature 3 (4 bytes)
+    
+    // XTEA key (16 bytes)
+    Game.xteaKey = [
+        Math.floor(Math.random() * 0xFFFFFFFF),
+        Math.floor(Math.random() * 0xFFFFFFFF),
+        Math.floor(Math.random() * 0xFFFFFFFF),
+        Math.floor(Math.random() * 0xFFFFFFFF)
+    ];
+    out.writeU32(Game.xteaKey[0]);
+    out.writeU32(Game.xteaKey[1]);
+    out.writeU32(Game.xteaKey[2]);
+    out.writeU32(Game.xteaKey[3]);
+    
     out.writeString(account);
     out.writeString(password);
+    
     sendPacket(out);
 }
 
@@ -2747,6 +2766,8 @@ window.addEventListener('load', () => {
 });
 
 console.log('🎮 Nexoria Online - Cliente Web Carregado!');
+console.log('Configured WS Login:', WS_LOGIN_URL);
+console.log('Configured WS Game:', WS_GAME_URL);
 </script>
 </body>
 </html>

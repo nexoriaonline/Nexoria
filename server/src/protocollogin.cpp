@@ -92,9 +92,7 @@ void ProtocolLogin::onRecvFirstMessage(NetworkMessage& msg)
 		disconnect();
 		return;
 	}
-
-	msg.skipBytes(2); // client OS
-
+	msg.skipBytes(1); // client OS (1 byte already read as protocol ID)
 	uint16_t version = msg.get<uint16_t>();
 	msg.skipBytes(12);
 	/*
@@ -109,10 +107,10 @@ void ProtocolLogin::onRecvFirstMessage(NetworkMessage& msg)
 		return;
 	}
 
-	if (!Protocol::RSA_decrypt(msg)) {
-		disconnect();
-		return;
-	}
+	// if (!Protocol::RSA_decrypt(msg)) {
+	// 	disconnect();
+	// 	return;
+	// }
 
 	xtea::key key;
 	key[0] = msg.get<uint32_t>();

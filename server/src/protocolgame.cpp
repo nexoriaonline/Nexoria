@@ -332,10 +332,10 @@ void ProtocolGame::onRecvFirstMessage(NetworkMessage& msg)
 	OperatingSystem_t operatingSystem = static_cast<OperatingSystem_t>(msg.get<uint16_t>());
 	version = msg.get<uint16_t>();
 
-	if (!Protocol::RSA_decrypt(msg)) {
-		disconnect();
-		return;
-	}
+//	if (!Protocol::RSA_decrypt(msg)) {
+//		disconnect();
+//		return;
+//	}
 
 	xtea::key key;
 	key[0] = msg.get<uint32_t>();
